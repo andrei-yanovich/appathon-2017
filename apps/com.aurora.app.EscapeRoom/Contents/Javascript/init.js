@@ -1,5 +1,6 @@
 // Include your views, styles and other things you need
 // The Contents folder is used as root here
+include('Javascript/Classes/Fire.js');
 include( 'Javascript/Theme.js' );
 include( 'Javascript/Views/RoomSelector.js' );
 include( 'Javascript/Views/Intro.js' );
@@ -18,6 +19,6 @@ MAF.application.init( {
 		{ id: 'Finish', viewClass: Finish },
     { id: 'About', viewClass: MAF.views.AboutBox } // Use the default About view
 	],
-	defaultViewId: 'GoT', // Declare what view to be loaded when opening the app
+	defaultViewId: 'AppWelcome', // Declare what view to be loaded when opening the app
 	settingsViewId: 'About' // Declare what view is opened when a used loads the settings
 } );

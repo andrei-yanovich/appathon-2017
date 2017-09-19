@@ -3,19 +3,40 @@ include( 'Javascript/Services/nuki.js' );
 include( 'Javascript/Services/nest.js' );
 include( 'Javascript/Services/curtain.js' );
 include( 'Javascript/Services/dyson.js' );
-include( 'Javascript/Services/nokia.js' );
+include( 'Javascript/Services/fire.js' );
+
+var gotDescription;
+fire.init();
 
 var game = {
     step0: function () {
         console.log('Game step 0');
-        // TODO: show message 0
-        nokia.waitForWeight(function() {
+        gotDescription.setSource('Images/Intro_text-part2.png');
+        gotDescription.setStyles({
+            width: 978,
+            height: 184,
+            hOffset: 471,
+            vOffset: 484
+        });
+
+        fire.onWeigth(function () {
             game.step1();
+        });
+
+        gotDescription.animate({
+            duration: 0.5,
+            opacity: 0
+        });
+        gotDescription.animate({
+            duration: 0.5,
+            opacity: 1
         });
     },
     step1: function () {
-        // TODO: show message 1
         console.log('Game step 1');
+        fire.onSteps(function () {
+            game.finish();
+        })
     },
     finish: function () {
         console.log('Game step finish');
@@ -35,13 +56,14 @@ var GoT = new MAF.Class( {
     //  1920 X 1080
 	// Create your view template
 	createView: function() {
-        var gotDescription = this.elements.gotDescription = new MAF.element.Text({
-            data: 'GoT escape room game',
+        gotDescription = this.elements.gotDescription = new MAF.element.Image({
+            aspect: 'source',
+            src: 'Images/Intro_text.png',
             styles: {
-                width: 500,
-                height: 200,
-                hOffset: 900,
-                vOffset: 100
+                width: 1363,
+                height: 451,
+                hOffset: 232,
+                vOffset: 305
             }
         }).appendTo(this);
         this.elements.thermo = new Thermometer({
@@ -69,14 +91,13 @@ var GoT = new MAF.Class( {
             console.log('Dyson cool down');
         });
 
-        game.step0();
+        setTimeout(game.step0, 10000);
 
         (function (event) {
             log(event.payload);
         }).subscribeTo(MAF.mediaplayer, 'onStateChange');
-
         var playlist = new MAF.media.Playlist();
-        playlist.addEntryByURL('http://www.dropbox.com/s/t5fimyfe89lpmg8/GoT_intro_song.mp3');
+        playlist.addEntryByURL('https://dl.dropboxusercontent.com/content_link/LGHUtq8ldtDsAYQIaRE1aczUKdptSpwlO5KKx6WF6PCsovg5eGIWkb950ERrB8RJ/file?dl=0&duc_id=dropbox_duc_id');
         // playlist.addEntryByURL('apps/com.aurora.app.EscapeRoom/Contents/Audio/Game_of_Thrones.mp3');
         MAF.mediaplayer.playlist.set(playlist);
         MAF.mediaplayer.playlist.start();

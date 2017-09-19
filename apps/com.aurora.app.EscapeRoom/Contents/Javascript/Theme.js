@@ -28,7 +28,7 @@ Theme.set({
     },
     GoT: {
         styles: {
-            backgroundImage: 'Images/Screen0.2.jpg',
+            backgroundImage: 'Images/Screen1.0.jpg',
             'background-repeat': 'no-repeat',
             'background-size': 'cover'
         }
