@@ -30,10 +30,36 @@ function setNestParam(nestId, key, value, cb) {
      }).send();
 }
 
+var setTempTimerId = null;
+
 var nest = {
     setTemp: function (temp, cb) {
         getNest(function (nestId) {
             setNestParam(nestId, 'target_temperature_c', temp, cb);
+        });
+    },
+    startSetTemp: function () {
+        clearTimeout(setTempTimerId);
+
+        var temp = 25;
+        var stepsCounter = 15;
+
+
+        getNest(function (nestId) {
+            function setTempStep() {
+                setTempTimerId = setTimeout(function () {
+                    console.log('Nest set to', temp);
+                    setNestParam(nestId, 'target_temperature_c', temp, function() {
+                        stepsCounter--;
+                        temp--;
+                        if (stepsCounter > 0 && temp > 9) {
+                            setTempStep();
+                        }
+                    });
+                }, 15000);
+            }
+
+            setTempStep();
         });
     }
 };

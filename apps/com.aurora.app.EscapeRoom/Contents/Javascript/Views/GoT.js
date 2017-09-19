@@ -2,6 +2,7 @@ include( 'Javascript/Services/hue.js' );
 include( 'Javascript/Services/nuki.js' );
 include( 'Javascript/Services/nest.js' );
 include( 'Javascript/Services/curtain.js' );
+include( 'Javascript/Services/dyson.js' );
 
 // Create a new View class and extend it from the MAF.system.SidebarView
 var GoT = new MAF.Class( {
@@ -27,11 +28,12 @@ var GoT = new MAF.Class( {
         nuki.unlock(function () {
             console.log('Nuki unlocked');
         });
-        nest.setTemp(9, function () {
-            console.log('Nest set up')
-        });
+        nest.startSetTemp();
         curtain.close(function () {
             console.log('Curtain closed');
+        });
+        dyson.coolDown(function () {
+            console.log('Dyson cool down');
         });
 	},
 
