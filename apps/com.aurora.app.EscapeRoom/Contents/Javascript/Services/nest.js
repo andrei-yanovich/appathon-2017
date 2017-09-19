@@ -5,7 +5,6 @@ function getNest(cb) {
            'Content-Type': 'application/json'
         },
         onComplete: function(request) {
-            debugger;
             var nestId = Object.keys(JSON.parse(request.response).thermostats)[0];
 
             cb(nestId);

@@ -19,7 +19,7 @@ function getLigths(cb) {
 
 function setDim(lights, cb) {
     var done = 0;
-debugger;
+
     lights.forEach(function (ligthId) {
         new Request({
             url: 'http://the-thing.appathon.tv/philips-hue/api/59MSn7uqdUFj96Gb0r7fevecVH9A5IRSbEonz7va/lights/' + ligthId +'/state',
