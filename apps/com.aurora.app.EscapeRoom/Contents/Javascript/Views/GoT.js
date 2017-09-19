@@ -3,6 +3,28 @@ include( 'Javascript/Services/nuki.js' );
 include( 'Javascript/Services/nest.js' );
 include( 'Javascript/Services/curtain.js' );
 include( 'Javascript/Services/dyson.js' );
+include( 'Javascript/Services/nokia.js' );
+
+var game = {
+    step0: function () {
+        console.log('Game step 0');
+        // TODO: show message 0
+        nokia.waitForWeight(function() {
+            game.step1();
+        });
+    },
+    step1: function () {
+        // TODO: show message 1
+        console.log('Game step 1');
+    },
+    finish: function () {
+        console.log('Game step finish');
+        nuki.lock(function () {
+            console.log('Nuki locked');
+        });
+        MAF.application.loadView('Finish');
+    }
+};
 
 // Create a new View class and extend it from the MAF.system.SidebarView
 var GoT = new MAF.Class( {
@@ -47,6 +69,8 @@ var GoT = new MAF.Class( {
             console.log('Dyson cool down');
         });
 
+        game.step0();
+
         (function (event) {
             log(event.payload);
         }).subscribeTo(MAF.mediaplayer, 'onStateChange');
@@ -71,5 +95,9 @@ var GoT = new MAF.Class( {
 	// After create view and when returning to the view the update view is called
 	updateView: function() {
         this.resetThermo();
-	}
+    },
+
+    hideView: function() {
+        nest.stopSetTemp();
+    }
 } );

@@ -107,6 +107,9 @@ app.get('/proxy', rawParser, function(req,res){
 app.post('/proxy', rawParser, function(req,res){
   handleProxyRequest(req, res, true);
 });
+app.put('/proxy', rawParser, function(req,res){
+  handleProxyRequest(req, res, true);
+});
 
 app.post('/jshint', urlParser, function(req,res){
   var results = '';
