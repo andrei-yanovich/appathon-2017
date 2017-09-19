@@ -34,11 +34,12 @@ var RoomSelector = new MAF.Class( {
                 }
             }
         }).appendTo(this);
-        var gotDescription = this.elements.gotDescription = new MAF.element.Text({
-            data: 'qwe asd zxc qwe asd zxc',
+        var gotDescription = this.elements.gotDescription = new MAF.element.Image({
+            src: 'Images/Tile_GoT.jpg',
+            autoShow: false,
+            srcHeight: 371,
+            srcWidth: 730,
             styles: {
-                width: 200,
-                height: 200,
                 hOffset: 900,
                 vOffset: 100,
             },
@@ -70,11 +71,12 @@ var RoomSelector = new MAF.Class( {
                 }
             }
         }).appendTo(this);
-        var room0Description = this.elements.room0Description = new MAF.element.Text({
-            data: '11111qwe asd zxc qwe asd zxc',
+        var room0Description = this.elements.room0Description = new MAF.element.Image({
+            src: 'Images/Tile_2.jpg',
+            autoShow: false,
+            srcHeight: 371,
+            srcWidth: 730,
             styles: {
-                width: 200,
-                height: 200,
                 hOffset: 900,
                 vOffset: 100,
             },
