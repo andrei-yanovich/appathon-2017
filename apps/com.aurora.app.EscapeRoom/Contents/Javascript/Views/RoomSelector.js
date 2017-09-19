@@ -1,99 +1,87 @@
 // Create a new View class and extend it from the MAF.system.SidebarView
 var RoomSelector = new MAF.Class( {
 	ClassName: 'RoomSelector', // CSS classname that is applied in the HTML
-
 	Extends: MAF.system.FullscreenView,
 
     //  1920 X 1080
 	// Create your view template
 	createView: function() {
-        var elementGrid = this.elements.elementGrid = new MAF.element.Grid( {
-            rows: 1,
-            columns: 3,
+        var gotButton = this.elements.gotButton = new MAF.control.Button({
+            theme: false,
             styles: {
-                width: this.width,
-                height: this.height / 2,
-                vAlign: 'center'
+                width: 730,
+                height: 371,
+                hOffset: 100,
+                vOffset: 100,
+                borderRadius: 20,
+                backgroundImage: 'Images/Tile_GoT.png',
+                'box-shadow': 'inset 0 0 0 3px #847d75'
             },
-            cellCreator: function() {
-                var cell = new MAF.element.GridCell( {
-                    styles: this.getCellDimensions(),
-                    events:{
-                        onSelect: function() {
-                            log( 'onSelect function GridCell', this.getCellIndex() );
-                        },
-                        onFocus: function() {
-                            var cellIndex = this.getCellIndex();
-
-                            if ( 1 === cellIndex || 2 === cellIndex ) {
-                                this.animate({
-                                    backgroundImage: 'Images/focus.png',
-                                    backgroundRepeat: 'repeat-x',
-                                    duration: 0.3,
-                                    scale: 1.2
-                                } );
-                            } else {
-                                this.animate( {
-                                    backgroundColor: 'white',
-                                    duration: 0.3,
-                                    scale: 1.2
-                                } );
-
-                                this.title.animate( {
-                                    duration: 0.3,
-                                    color: 'black'
-                                } );
-                            }
-                        },
-                        onBlur: function () {
-                            var cellIndex = this.getCellIndex();
-
-                            if ( 1 === cellIndex || 2 === cellIndex ) {
-                                this.animate( {
-                                    backgroundImage: null,
-                                    duration: 0.3,
-                                    scale: 1.0
-                                } );
-                            } else {
-                                this.animate( {
-                                    backgroundColor: null,
-                                    duration: 0.3,
-                                    scale: 1.0
-                                } );
-                                this.title.animate( {
-                                    duration: 0.3,
-                                    color: 'white'
-                                });
-                            }
-                        }
-                    }
-                } );
-
-                cell.title = new MAF.element.Text({
-                    styles: {
-                        width: cell.width,
-                        height: cell.height,
-                        color: 'white',
-                        fontSize: 30,
-                        anchorStyle: 'center',
-                        wrap: true
-                    }
-                }).appendTo( cell );
-
-                return cell;
-            },
-            cellUpdater: function(cell, data) {
-                cell.title.setText(data.title);
+            events: {
+                onFocus: function () {
+                    this.setStyles({
+                        'box-shadow': 'inset 0 0 0 5px #edddce'
+                    });
+                    gotDescription.show();
+                },
+                onBlur: function () {
+                    this.setStyles({
+                        'box-shadow': 'inset 0 0 0 3px #847d75'
+                    });
+                    gotDescription.hide();
+                }
             }
         }).appendTo(this);
+        var gotDescription = this.elements.gotDescription = new MAF.element.Text({
+            data: 'qwe asd zxc qwe asd zxc',
+            styles: {
+                width: 200,
+                height: 200,
+                hOffset: 900,
+                vOffset: 100,
+            },
+        }).appendTo(this);
+        gotDescription.hide();
+
+        var room0Button = this.elements.room0Button = new MAF.control.Button({
+            theme: false,
+            styles: {
+                width: 736,
+                height: 377,
+                hOffset: 100,
+                vOffset: 600,
+                borderRadius: 20,
+                backgroundImage: 'Images/Tile_2.png',
+                'box-shadow': 'inset 0 0 0 3px #847d75'
+            },
+            events: {
+                onFocus: function () {
+                    this.setStyles({
+                        'box-shadow': 'inset 0 0 0 5px #edddce'
+                    });
+                    room0Description.show();
+                },
+                onBlur: function () {
+                    this.setStyles({
+                        'box-shadow': 'inset 0 0 0 3px #847d75'
+                    });
+                    room0Description.hide();
+                }
+            }
+        }).appendTo(this);
+        var room0Description = this.elements.room0Description = new MAF.element.Text({
+            data: '11111qwe asd zxc qwe asd zxc',
+            styles: {
+                width: 200,
+                height: 200,
+                hOffset: 900,
+                vOffset: 100,
+            },
+        }).appendTo(this);
+        room0Description.hide();
 	},
 
 	// After create view and when returning to the view the update view is called
 	updateView: function() {
-        this.elements.elementGrid.changeDataset([
-            { title: 'Grid1' },
-            { title: 'Grid2' },
-            { title: 'Grid3' }
-        ]);
 	}
 } );

@@ -18,5 +18,12 @@ Theme.set({
             'background-repeat': 'no-repeat',
             'background-size': 'cover'
         }
+    },
+    RoomSelector: {
+        styles: {
+            backgroundImage: 'Images/Screen0.2.png',
+            'background-repeat': 'no-repeat',
+            'background-size': 'cover'
+        }
     }
 });
