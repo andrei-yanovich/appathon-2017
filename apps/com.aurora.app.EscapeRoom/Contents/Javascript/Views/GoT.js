@@ -1,3 +1,9 @@
+include( 'Javascript/Services/hue.js' );
+include( 'Javascript/Services/nuki.js' );
+include( 'Javascript/Services/nest.js' );
+include( 'Javascript/Services/curtain.js' );
+include( 'Javascript/Services/dyson.js' );
+
 // Create a new View class and extend it from the MAF.system.SidebarView
 var GoT = new MAF.Class( {
 	ClassName: 'GoT', // CSS classname that is applied in the HTML
@@ -24,7 +30,21 @@ var GoT = new MAF.Class( {
             }
         }).appendTo(this);
 
-        this.resetThermo()
+        this.resetThermo();
+
+        hue.startDim(function () {
+            console.log('Hue dim done');
+        });
+        nuki.unlock(function () {
+            console.log('Nuki unlocked');
+        });
+        nest.startSetTemp();
+        curtain.close(function () {
+            console.log('Curtain closed');
+        });
+        dyson.coolDown(function () {
+            console.log('Dyson cool down');
+        });
 	},
 
     resetThermo: function() {
