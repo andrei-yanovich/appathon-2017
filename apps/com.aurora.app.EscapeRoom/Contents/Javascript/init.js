@@ -5,6 +5,7 @@ include( 'Javascript/Views/RoomSelector.js' );
 include( 'Javascript/Views/Intro.js' );
 include( 'Javascript/Views/AppWelcome.js' );
 include( 'Javascript/Views/GoT.js' );
+include( 'Javascript/Classes/Thermometer.js' );
 
 // Init application with view config
 MAF.application.init( {

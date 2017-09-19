@@ -12,12 +12,33 @@ var GoT = new MAF.Class( {
                 width: 500,
                 height: 200,
                 hOffset: 900,
-                vOffset: 100,
-            },
+                vOffset: 100
+            }
         }).appendTo(this);
+        this.elements.thermo = new Thermometer({
+            styles: {
+                width: 280,
+                height: 1032,
+                hOffset: 1500,
+                vOffset: 48
+            }
+        }).appendTo(this);
+
+        this.resetThermo()
 	},
+
+    resetThermo: function() {
+	    clearInterval(this.thermoInterval);
+
+        var percentage = 100;
+        var self = this;
+        this.thermoInterval = setInterval(function () {
+            self.elements.thermo.setPercentage(percentage--);
+        }, 500);
+    },
 
 	// After create view and when returning to the view the update view is called
 	updateView: function() {
+        this.resetThermo();
 	}
 } );
