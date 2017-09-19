@@ -40,8 +40,21 @@ var game = {
     },
     finish: function () {
         console.log('Game step finish');
+        nest.stopSetTemp();
+        nest.setTemp(23, function () {
+            console.log('Nest back to normal');
+        });
         nuki.lock(function () {
             console.log('Nuki locked');
+        });
+        curtain.open(function () {
+            console.log('Curtain open');
+        });
+        dyson.stop(function () {
+            console.log('Dyson stop');
+        });
+        hue.restore(function () {
+            console.log('Hues restored');
         });
         MAF.application.loadView('Finish');
     }
@@ -98,7 +111,6 @@ var GoT = new MAF.Class( {
         }).subscribeTo(MAF.mediaplayer, 'onStateChange');
         var playlist = new MAF.media.Playlist();
         playlist.addEntryByURL('https://dl.dropboxusercontent.com/content_link/LGHUtq8ldtDsAYQIaRE1aczUKdptSpwlO5KKx6WF6PCsovg5eGIWkb950ERrB8RJ/file?dl=0&duc_id=dropbox_duc_id');
-        // playlist.addEntryByURL('apps/com.aurora.app.EscapeRoom/Contents/Audio/Game_of_Thrones.mp3');
         MAF.mediaplayer.playlist.set(playlist);
         MAF.mediaplayer.playlist.start();
 	},
@@ -120,5 +132,6 @@ var GoT = new MAF.Class( {
 
     hideView: function() {
         nest.stopSetTemp();
+        MAF.mediaplayer.control.stop();
     }
 } );
