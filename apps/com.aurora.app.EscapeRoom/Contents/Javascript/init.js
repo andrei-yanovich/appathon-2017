@@ -16,6 +16,6 @@ MAF.application.init( {
 		{ id: 'GoT', viewClass: GoT },
     { id: 'About', viewClass: MAF.views.AboutBox } // Use the default About view
 	],
-	defaultViewId: 'AppWelcome', // Declare what view to be loaded when opening the app
+	defaultViewId: 'GoT', // Declare what view to be loaded when opening the app
 	settingsViewId: 'About' // Declare what view is opened when a used loads the settings
 } );
