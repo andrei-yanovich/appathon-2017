@@ -14,7 +14,7 @@ var RoomSelector = new MAF.Class( {
                 hOffset: 100,
                 vOffset: 100,
                 borderRadius: 20,
-                backgroundImage: 'Images/Tile_GoT.png'
+                backgroundImage: 'Images/Tile_GoT.jpg'
             },
             events: {
                 onFocus: function () {
@@ -53,7 +53,7 @@ var RoomSelector = new MAF.Class( {
                 hOffset: 100,
                 vOffset: 600,
                 borderRadius: 20,
-                backgroundImage: 'Images/Tile_2.png'
+                backgroundImage: 'Images/Tile_2.jpg'
             },
             events: {
                 onFocus: function () {

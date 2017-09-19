@@ -9,6 +9,7 @@ var GoT = new MAF.Class( {
 	ClassName: 'GoT', // CSS classname that is applied in the HTML
 	Extends: MAF.system.FullscreenView,
 
+
     //  1920 X 1080
 	// Create your view template
 	createView: function() {
@@ -45,6 +46,16 @@ var GoT = new MAF.Class( {
         dyson.coolDown(function () {
             console.log('Dyson cool down');
         });
+
+        (function (event) {
+            log(event.payload);
+        }).subscribeTo(MAF.mediaplayer, 'onStateChange');
+
+        var playlist = new MAF.media.Playlist();
+        playlist.addEntryByURL('http://www.dropbox.com/s/t5fimyfe89lpmg8/GoT_intro_song.mp3');
+        // playlist.addEntryByURL('apps/com.aurora.app.EscapeRoom/Contents/Audio/Game_of_Thrones.mp3');
+        MAF.mediaplayer.playlist.set(playlist);
+        MAF.mediaplayer.playlist.start();
 	},
 
     resetThermo: function() {

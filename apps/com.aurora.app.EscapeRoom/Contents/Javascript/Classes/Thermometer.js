@@ -36,7 +36,7 @@ var Thermometer = new MAF.Class({
 
         this.elements.thermoBg = new MAF.element.Image({
             aspect: 'source',
-            src: 'Images/Themometer_bg2.png'
+            src: 'Images/Themometer_bg.png'
         }).appendTo(this);
     },
 

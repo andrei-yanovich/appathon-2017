@@ -6,6 +6,8 @@ var AppWelcome = new MAF.Class( {
     //  1920 X 1080
     // Create your view template
     createView: function() {
+        MAF.mediaplayer.init();
+
         var deviceSelection = this.deviceSelection = new MAF.control.TextButton({
             theme: false,
             label: 'Device Selection',

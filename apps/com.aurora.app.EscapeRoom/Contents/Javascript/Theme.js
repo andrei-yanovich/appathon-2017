@@ -14,21 +14,21 @@ Theme.set({
     },
     AppWelcome: {
         styles: {
-            backgroundImage: 'Images/Screen0.1.png',
+            backgroundImage: 'Images/Screen0.1.jpg',
             'background-repeat': 'no-repeat',
             'background-size': 'cover'
         }
     },
     RoomSelector: {
         styles: {
-            backgroundImage: 'Images/Screen0.2.png',
+            backgroundImage: 'Images/Screen0.2.jpg',
             'background-repeat': 'no-repeat',
             'background-size': 'cover'
         }
     },
     GoT: {
         styles: {
-            backgroundImage: 'Images/Screen0.2.png',
+            backgroundImage: 'Images/Screen0.2.jpg',
             'background-repeat': 'no-repeat',
             'background-size': 'cover'
         }
