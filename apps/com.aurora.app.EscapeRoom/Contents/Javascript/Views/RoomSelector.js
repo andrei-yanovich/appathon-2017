@@ -14,21 +14,23 @@ var RoomSelector = new MAF.Class( {
                 hOffset: 100,
                 vOffset: 100,
                 borderRadius: 20,
-                backgroundImage: 'Images/Tile_GoT.png',
-                'box-shadow': 'inset 0 0 0 3px #847d75'
+                backgroundImage: 'Images/Tile_GoT.png'
             },
             events: {
                 onFocus: function () {
                     this.setStyles({
-                        'box-shadow': 'inset 0 0 0 5px #edddce'
+                        border: '5px solid #edddce'
                     });
                     gotDescription.show();
                 },
                 onBlur: function () {
                     this.setStyles({
-                        'box-shadow': 'inset 0 0 0 3px #847d75'
+                        border: '3px solid #847d75'
                     });
                     gotDescription.hide();
+                },
+                onSelect: function () {
+                    MAF.application.loadView('GoT');
                 }
             }
         }).appendTo(this);
@@ -51,19 +53,18 @@ var RoomSelector = new MAF.Class( {
                 hOffset: 100,
                 vOffset: 600,
                 borderRadius: 20,
-                backgroundImage: 'Images/Tile_2.png',
-                'box-shadow': 'inset 0 0 0 3px #847d75'
+                backgroundImage: 'Images/Tile_2.png'
             },
             events: {
                 onFocus: function () {
                     this.setStyles({
-                        'box-shadow': 'inset 0 0 0 5px #edddce'
+                        border: '5px solid #edddce'
                     });
                     room0Description.show();
                 },
                 onBlur: function () {
                     this.setStyles({
-                        'box-shadow': 'inset 0 0 0 3px #847d75'
+                        border: '3px solid #847d75'
                     });
                     room0Description.hide();
                 }

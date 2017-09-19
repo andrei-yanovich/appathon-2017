@@ -25,5 +25,10 @@ Theme.set({
             'background-repeat': 'no-repeat',
             'background-size': 'cover'
         }
+    },
+    GoT: {
+        styles: {
+            backgroundImage: 'Images/Screen0.2.png',
+        }
     }
 });
