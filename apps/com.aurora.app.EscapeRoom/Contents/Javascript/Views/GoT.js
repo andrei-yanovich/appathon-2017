@@ -3,6 +3,28 @@ include( 'Javascript/Services/nuki.js' );
 include( 'Javascript/Services/nest.js' );
 include( 'Javascript/Services/curtain.js' );
 include( 'Javascript/Services/dyson.js' );
+include( 'Javascript/Services/nokia.js' );
+
+var game = {
+    step0: function () {
+        console.log('Game step 0');
+        // TODO: show message 0
+        nokia.waitForWeight(() => {
+            game.step1();
+        });
+    },
+    step1: function () {
+        // TODO: show message 1
+        console.log('Game step 1');
+    },
+    finish: function () {
+        console.log('Game step finish');
+        nuki.lock(function () {
+            console.log('Nuki locked');
+        });
+        MAF.application.loadView('Finish');
+    }
+};
 
 // Create a new View class and extend it from the MAF.system.SidebarView
 var GoT = new MAF.Class( {
@@ -45,6 +67,8 @@ var GoT = new MAF.Class( {
         dyson.coolDown(function () {
             console.log('Dyson cool down');
         });
+
+        game.step0();
 	},
 
     resetThermo: function() {
@@ -62,7 +86,7 @@ var GoT = new MAF.Class( {
         this.resetThermo();
     },
 
-    suicide: function() {
+    hideView: function() {
         nest.stopSetTemp();
     }
 } );

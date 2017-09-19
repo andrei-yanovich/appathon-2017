@@ -50,12 +50,15 @@ var nest = {
                 setTempTimerId = setTimeout(function () {
                     console.log('Nest set to', temp);
                     setNestParam(nestId, 'target_temperature_c', temp, function() {
-                        stepsCounter--;
-                        temp--;
-                        if (stepsCounter > 0 && temp > 9) {
-                            setTempStep();
-                        }
+                        console.log('Nest set done');
                     });
+
+                    stepsCounter--;
+                    temp--;
+
+                    if (stepsCounter > 0 && temp > 9) {
+                        setTempStep();
+                    }
                 }, 15000);
             }
 
