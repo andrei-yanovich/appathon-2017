@@ -31,10 +31,34 @@ function cool(dysonId, cb) {
      }).send();
 }
 
+function stop(dysonId, cb) {
+    new Request({
+        url: 'http://the-thing.appathon.tv/dyson-pure-hot-cool/dyson/devices/' + dysonId +'/state',
+        method: 'PUT',
+        headers: {
+           'Content-Type': 'application/json'
+        },
+        data: {
+            oscillation: 'Oscillation.OSCILLATION_OFF',
+            fan_speed: 'FanSpeed.FAN_SPEED_1',
+            heat_target: 'HeatTarget.celsius(23)',
+            heat_mode: 'HeatMode.HEAT_ON'
+        },
+        onComplete: function () {
+            cb();
+        }
+     }).send();
+}
+
 var dyson = {
     coolDown: function (cb) {
         getDyson(function(dysonId) {
             cool(dysonId, cb);
+        });
+    },
+    stop: function (cb) {
+        getDyson(function(dysonId) {
+            stop(dysonId, cb);
         });
     }
 };

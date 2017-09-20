@@ -7,6 +7,8 @@ include( 'Javascript/Services/fire.js' );
 
 var gotDescription;
 
+var GAME_DURATION = 150; // 2.5 minutes
+
 var game = {
     step0: function () {
         console.log('Game step 0');
@@ -42,15 +44,30 @@ var game = {
     step1: function () {
         console.log('Game step 1');
         fire.onSteps(function () {
-            game.finish();
+            game.finish(true);
         })
     },
-    finish: function () {
+    finish: function (victory) {
         console.log('Game step finish');
+        clearInterval(this.thermoInterval);
+        clearTimeout(this.failTimerId);
+        nest.stopSetTemp();
+        nest.setTemp(23, function () {
+            console.log('Nest back to normal');
+        });
         nuki.lock(function () {
             console.log('Nuki locked');
         });
-        MAF.application.loadView('Finish');
+        curtain.open(function () {
+            console.log('Curtain open');
+        });
+        dyson.stop(function () {
+            console.log('Dyson stop');
+        });
+        hue.restore(function () {
+            console.log('Hues restored');
+        });
+        MAF.application.loadView(victory ? 'Finish' : 'Fail');
     }
 };
 
@@ -121,7 +138,30 @@ var GoT = new MAF.Class( {
         (function (event) {
             log(event.payload);
         }).subscribeTo(MAF.mediaplayer, 'onStateChange');
+        var playlist = new MAF.media.Playlist();
+        playlist.addEntryByURL('https://andrei-yanovich.github.io/appathon-2017/GoT_intro_song.mp3');
+        playlist.addEntryByURL('https://andrei-yanovich.github.io/appathon-2017/RainsOfCastamere.mp3');
+        MAF.mediaplayer.playlist.set(playlist);
         MAF.mediaplayer.playlist.start();
+
+        this.failTimerId = setTimeout(function () {
+            game.finish(false);
+        }, GAME_DURATION * 1000);
+	},
+
+    resetThermo: function() {
+	    clearInterval(this.thermoInterval);
+
+        var percentage = 100;
+        var fullDuration = GAME_DURATION;
+        var stepDurationDelimiter = 4;
+        var stepDuration = 1000 / stepDurationDelimiter;
+        var stepDelta = percentage / fullDuration / stepDurationDelimiter;
+        var self = this;
+        this.thermoInterval = setInterval(function () {
+            percentage -= stepDelta;
+            self.elements.thermo.setPercentage(percentage);
+        }, stepDuration);
     },
 
 	// After create view and when returning to the view the update view is called
@@ -132,5 +172,6 @@ var GoT = new MAF.Class( {
     hideView: function() {
         nest.stopSetTemp();
         GoT.stopThermo();
+        MAF.mediaplayer.control.stop();
     }
 });
