@@ -24,7 +24,7 @@ var fire = {
                 fire.stepsHandler && fire.stepsHandler();
             });
             var stones = firebase.database().ref('stones');
-            steps.on('value', function(steps) {
+            stones.on('value', function(steps) {
                 console.log('!!!!!!!!!!', steps.val());
                 fire.stonesHandler && fire.stonesHandler();
             });

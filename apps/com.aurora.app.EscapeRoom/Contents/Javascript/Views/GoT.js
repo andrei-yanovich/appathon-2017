@@ -43,9 +43,65 @@ var game = {
     },
     step1: function (view) {
         console.log('Game step 1');
+
+        var onAnimationEnded = function (anim) {
+            // anim.reset();
+            gotDescription.setStyle('transition', 'none');
+            gotDescription.setStyles({
+                srcHeight: 517,
+                srcWidth: 933,
+                width: 933,
+                height: 517,
+                hOffset: 443,
+                vOffset: 202
+            });
+            gotDescription.setSource('Images/Raven_note1.png');
+            gotDescription.animate({
+                duration: 0.5,
+                opacity: 1
+            });
+        };
+
+        onAnimationEnded.subscribeOnce(gotDescription, 'onAnimationEnded', this);
+        gotDescription.animate({
+            duration: 0.5,
+            opacity: 0
+        });
+
         fire.onSteps(function () {
-            game.finish(true, view);
+            game.step2(view);
         })
+    },
+    step2: function (view) {
+        console.log('Game step 2');
+
+        var onAnimationEnded = function (anim) {
+            // anim.reset();
+            gotDescription.setStyle('transition', 'none');
+            gotDescription.setStyles({
+                srcHeight: 685,
+                srcWidth: 1306,
+                width: 1306,
+                height: 685,
+                hOffset: 212,
+                vOffset: 231
+            });
+            gotDescription.setSource('Images/Stone_and_text.png');
+            gotDescription.animate({
+                duration: 0.5,
+                opacity: 1
+            });
+        };
+
+        onAnimationEnded.subscribeOnce(gotDescription, 'onAnimationEnded', this);
+        gotDescription.animate({
+            duration: 0.5,
+            opacity: 0
+        });
+
+        fire.onStones(function () {
+            game.finish(true, view);
+        });
     },
     finish: function (victory, view) {
         console.log('Game step finish');
