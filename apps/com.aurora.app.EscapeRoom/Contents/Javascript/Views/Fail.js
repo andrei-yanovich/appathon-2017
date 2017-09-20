@@ -1,6 +1,6 @@
 // Create a new View class and extend it from the MAF.system.SidebarView
-var Finish = new MAF.Class( {
-    ClassName: 'Finish', // CSS classname that is applied in the HTML
+var Fail = new MAF.Class( {
+    ClassName: 'Fail', // CSS classname that is applied in the HTML
     Extends: MAF.system.FullscreenView,
 
     //  1920 X 1080

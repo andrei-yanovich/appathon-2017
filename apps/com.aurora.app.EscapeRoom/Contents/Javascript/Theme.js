@@ -32,5 +32,19 @@ Theme.set({
             'background-repeat': 'no-repeat',
             'background-size': 'cover'
         }
+    },
+    Finish: {
+        styles: {
+            backgroundImage: 'Images/Victory.jpg',
+            'background-repeat': 'no-repeat',
+            'background-size': 'cover'
+        }
+    },
+    Fail: {
+        styles: {
+            backgroundImage: 'Images/Fail.jpg',
+            'background-repeat': 'no-repeat',
+            'background-size': 'cover'
+        }
     }
 });

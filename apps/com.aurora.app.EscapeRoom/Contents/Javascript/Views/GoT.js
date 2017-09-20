@@ -8,6 +8,8 @@ include( 'Javascript/Services/fire.js' );
 var gotDescription;
 fire.init();
 
+var GAME_DURATION = 150; // 2.5 minutes
+
 var game = {
     step0: function () {
         console.log('Game step 0');
@@ -35,11 +37,13 @@ var game = {
     step1: function () {
         console.log('Game step 1');
         fire.onSteps(function () {
-            game.finish();
+            game.finish(true);
         })
     },
-    finish: function () {
+    finish: function (victory) {
         console.log('Game step finish');
+        clearInterval(this.thermoInterval);
+        clearInterval(this.failTimerId);
         nest.stopSetTemp();
         nest.setTemp(23, function () {
             console.log('Nest back to normal');
@@ -56,7 +60,7 @@ var game = {
         hue.restore(function () {
             console.log('Hues restored');
         });
-        MAF.application.loadView('Finish');
+        MAF.application.loadView(victory ? 'Finish' : 'Fail');
     }
 };
 
@@ -113,16 +117,25 @@ var GoT = new MAF.Class( {
         playlist.addEntryByURL('https://dl.dropboxusercontent.com/content_link/LGHUtq8ldtDsAYQIaRE1aczUKdptSpwlO5KKx6WF6PCsovg5eGIWkb950ERrB8RJ/file?dl=0&duc_id=dropbox_duc_id');
         MAF.mediaplayer.playlist.set(playlist);
         MAF.mediaplayer.playlist.start();
+
+        this.failTimerId = setTimeout(() => {
+            game.finish(false);
+        }, GAME_DURATION * 1000);
 	},
 
     resetThermo: function() {
 	    clearInterval(this.thermoInterval);
 
         var percentage = 100;
+        var fullDuration = GAME_DURATION;
+        var stepDurationDelimiter = 4;
+        var stepDuration = 1000 / stepDurationDelimiter;
+        var stepDelta = percentage / fullDuration / stepDurationDelimiter;
         var self = this;
         this.thermoInterval = setInterval(function () {
-            self.elements.thermo.setPercentage(percentage--);
-        }, 500);
+            percentage -= stepDelta;
+            self.elements.thermo.setPercentage(percentage);
+        }, stepDuration);
     },
 
 	// After create view and when returning to the view the update view is called
