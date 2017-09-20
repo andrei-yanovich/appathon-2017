@@ -192,6 +192,7 @@ var GoT = new MAF.Class( {
         playlist.addEntryByURL('https://andrei-yanovich.github.io/appathon-2017/GoT_intro_song.mp3');
         playlist.addEntryByURL('https://andrei-yanovich.github.io/appathon-2017/RainsOfCastamere.mp3');
         MAF.mediaplayer.playlist.set(playlist);
+        MAF.mediaplayer.control.mute(false);
         MAF.mediaplayer.playlist.start();
 
         this.failTimerId = setTimeout(function () {

@@ -10,6 +10,7 @@ var AppWelcome = new MAF.Class( {
         fire.init(window.$().parentNode.parentNode.parentNode.parentNode);
         window.$().style.backgroundColor = '#000';
 
+        MAF.mediaplayer.control.mute(true);
         var deviceSelection = this.deviceSelection = new MAF.control.TextButton({
             theme: false,
             label: 'Device Selection',
