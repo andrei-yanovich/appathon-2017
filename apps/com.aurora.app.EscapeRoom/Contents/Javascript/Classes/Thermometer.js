@@ -1,4 +1,4 @@
-var THERMO_HEIGHT = 590;
+var THERMO_HEIGHT = 590 - 100;
 
 var Thermometer = new MAF.Class({
     Extends: MAF.element.Container,
