@@ -45,6 +45,9 @@ var AppWelcome = new MAF.Class( {
                     this.children[0].setStyles({
                         fontSize: 44
                     });
+                },
+                onSelect: function () {
+                    MAF.application.loadView('DeviceSelection');
                 }
             }
         }).appendTo(this);

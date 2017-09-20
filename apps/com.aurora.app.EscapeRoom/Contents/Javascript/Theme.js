@@ -26,6 +26,13 @@ Theme.set({
             'background-size': 'cover'
         }
     },
+    DeviceSelection: {
+        styles: {
+            backgroundImage: 'Images/Screen0.3.jpg',
+            'background-repeat': 'no-repeat',
+            'background-size': 'cover'
+        }
+    },
     GoT: {
         styles: {
             backgroundImage: 'Images/Screen1.0.jpg',
