@@ -18,8 +18,8 @@ var game = {
         });
 
         var onAnimationEnded = function (anim) {
-            anim.reset();
-            // gotDescription.setStyle('transition', 'none');
+            // anim.reset();
+            gotDescription.setStyle('transition', 'none');
             gotDescription.setStyles({
                 srcHeight: 166,
                 srcWidth: 968,
