@@ -165,7 +165,7 @@ var GoT = new MAF.Class( {
 
     hideView: function() {
         nest.stopSetTemp();
-        GoT.stopThermo();
+        this.stopThermo();
         MAF.mediaplayer.control.stop();
     }
 });
