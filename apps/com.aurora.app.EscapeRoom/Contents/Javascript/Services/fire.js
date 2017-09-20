@@ -23,6 +23,11 @@ var fire = {
                 console.log('!!!!!!!!!!', steps.val());
                 fire.stepsHandler && fire.stepsHandler();
             });
+            var stones = firebase.database().ref('stones');
+            steps.on('value', function(steps) {
+                console.log('!!!!!!!!!!', steps.val());
+                fire.stonesHandler && fire.stonesHandler();
+            });
         };
         document.body.appendChild(script);
     },
@@ -31,5 +36,8 @@ var fire = {
     },
     onSteps: function (handler) {
         fire.stepsHandler = handler;
+    },
+    onStones: function (handler) {
+        fire.stonesHandler = handler;
     }
 };
