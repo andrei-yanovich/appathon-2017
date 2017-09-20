@@ -1,11 +1,11 @@
 {
 	"identifier": "com.aurora.app.EscapeRoom",
-	"name": "Escape Room",
-	"version": "0.0.6",
+	"name": "Escape Stories",
+	"version": "0.0.9",
 	"author": "Aurora squad",
 	"company": "Aurora squad",
 	"copyright": "Aurora squad",
-	"description": "Appathon 2017 escape room.",
+	"description": "Turning your house into an escape room",
 	"categories": [ "video" ],
 	"scripts": "Javascript/init.js",
 	"images": {
