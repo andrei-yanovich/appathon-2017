@@ -1,4 +1,4 @@
-var THERMO_HEIGHT = 785;
+var THERMO_HEIGHT = 590;
 
 var Thermometer = new MAF.Class({
     Extends: MAF.element.Container,
@@ -10,33 +10,41 @@ var Thermometer = new MAF.Class({
 
         this.elements.thermoMaskCircle = new MAF.element.Container({
             styles: {
-                vOffset: 840,
-                hOffset: 55,
+                vOffset: 598,
+                hOffset: 40,
                 borderRadius: '50%',
                 backgroundColor: '#0fa5ff',
-                width: 150,
-                height: 150
+                width: 100,
+                height: 100
             }
         }).appendTo(this);
 
         this.elements.thermoBar = new MAF.element.Container({
             styles: {
-                vOffset: 70,
-                hOffset: 87,
+                vOffset: 105,
+                hOffset: 57,
                 backgroundColor: '#0fa5ff',
-                width: 100,
+                width: 60,
                 height: THERMO_HEIGHT
             }
         }).appendTo(this);
 
         this.elements.thermoShadow = new MAF.element.Image({
-            aspect: 'source',
-            src: 'Images/Themometer_shadow.png'
+            aspect: 'fit',
+            src: 'Images/Themometer_shadow.png',
+            styles: {
+                width: this.width,
+                height: this.height
+            }
         }).appendTo(this);
 
         this.elements.thermoBg = new MAF.element.Image({
-            aspect: 'source',
-            src: 'Images/Themometer_bg.png'
+            aspect: 'fit',
+            src: 'Images/Themometer_bg.png',
+            styles: {
+                width: this.width,
+                height: this.height
+            }
         }).appendTo(this);
     },
 

@@ -1,6 +1,5 @@
 // Include your views, styles and other things you need
 // The Contents folder is used as root here
-include('Javascript/Classes/Fire.js');
 include( 'Javascript/Theme.js' );
 include( 'Javascript/Views/RoomSelector.js' );
 include( 'Javascript/Views/Intro.js' );

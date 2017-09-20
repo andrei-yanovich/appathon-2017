@@ -21,29 +21,26 @@ var RoomSelector = new MAF.Class( {
                     this.setStyles({
                         border: '5px solid #edddce'
                     });
-                    gotDescription.show();
                 },
                 onBlur: function () {
                     this.setStyles({
                         border: '3px solid #847d75'
                     });
-                    gotDescription.hide();
                 },
                 onSelect: function () {
                     MAF.application.loadView('GoT');
                 }
             }
         }).appendTo(this);
-        var gotDescription = this.elements.gotDescription = new MAF.element.Text({
-            data: 'qwe asd zxc qwe asd zxc',
+        var gotDescription = this.elements.gotDescription = new MAF.element.Image({
+            src: 'Images/Rooms_info.png',
             styles: {
-                width: 200,
-                height: 200,
-                hOffset: 900,
-                vOffset: 100,
-            },
+                width: 898,
+                height: 616,
+                hOffset: 924,
+                vOffset: 127
+            }
         }).appendTo(this);
-        gotDescription.hide();
 
         var room0Button = this.elements.room0Button = new MAF.control.Button({
             theme: false,
@@ -60,26 +57,14 @@ var RoomSelector = new MAF.Class( {
                     this.setStyles({
                         border: '5px solid #edddce'
                     });
-                    room0Description.show();
                 },
                 onBlur: function () {
                     this.setStyles({
                         border: '3px solid #847d75'
                     });
-                    room0Description.hide();
                 }
             }
         }).appendTo(this);
-        var room0Description = this.elements.room0Description = new MAF.element.Text({
-            data: '11111qwe asd zxc qwe asd zxc',
-            styles: {
-                width: 200,
-                height: 200,
-                hOffset: 900,
-                vOffset: 100,
-            },
-        }).appendTo(this);
-        room0Description.hide();
 	},
 
 	// After create view and when returning to the view the update view is called

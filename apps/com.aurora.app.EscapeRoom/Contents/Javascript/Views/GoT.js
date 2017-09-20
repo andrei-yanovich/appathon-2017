@@ -6,30 +6,37 @@ include( 'Javascript/Services/dyson.js' );
 include( 'Javascript/Services/fire.js' );
 
 var gotDescription;
-fire.init();
 
 var game = {
     step0: function () {
         console.log('Game step 0');
-        gotDescription.setSource('Images/Intro_text-part2.png');
-        gotDescription.setStyles({
-            width: 978,
-            height: 184,
-            hOffset: 471,
-            vOffset: 484
-        });
 
         fire.onWeigth(function () {
             game.step1();
         });
 
+        var onAnimationEnded = function (anim) {
+            anim.reset();
+            // gotDescription.setStyle('transition', 'none');
+            gotDescription.setStyles({
+                srcHeight: 166,
+                srcWidth: 968,
+                width: 968,
+                height: 166,
+                hOffset: 471,
+                vOffset: 484
+            });
+            gotDescription.setSource('Images/Intro_text-part2.png');
+            gotDescription.animate({
+                duration: 0.5,
+                opacity: 1
+            });
+        };
+
+        onAnimationEnded.subscribeOnce(gotDescription, 'onAnimationEnded', this);
         gotDescription.animate({
             duration: 0.5,
             opacity: 0
-        });
-        gotDescription.animate({
-            duration: 0.5,
-            opacity: 1
         });
     },
     step1: function () {
@@ -52,26 +59,44 @@ var GoT = new MAF.Class( {
 	ClassName: 'GoT', // CSS classname that is applied in the HTML
 	Extends: MAF.system.FullscreenView,
 
-
     //  1920 X 1080
-	// Create your view template
-	createView: function() {
+    resetThermo: function() {
+	    clearInterval(this.thermoInterval);
+
+        var percentage = 100;
+        var self = this;
+        this.thermoInterval = setInterval(function () {
+            self.elements.thermo.setPercentage(percentage--);
+        }, 1000);
+    },
+
+    stopThermo: function () {
+        clearInterval(this.thermoInterval);
+    },
+
+    // Create your view template
+    createView: function() {
         gotDescription = this.elements.gotDescription = new MAF.element.Image({
             aspect: 'source',
             src: 'Images/Intro_text.png',
+            srcHeight: 418,
+            srcWidth: 1362,
             styles: {
-                width: 1363,
-                height: 451,
-                hOffset: 232,
+                width: 1362,
+                height: 418,
+                hOffset: 118,
                 vOffset: 305
+            },
+            events: {
+                onImageLoaded: this.onImageLoaded
             }
         }).appendTo(this);
         this.elements.thermo = new Thermometer({
             styles: {
-                width: 280,
-                height: 1032,
-                hOffset: 1500,
-                vOffset: 48
+                width: 198,
+                height: 730,
+                hOffset: 1595,
+                vOffset: 202
             }
         }).appendTo(this);
 
@@ -91,26 +116,12 @@ var GoT = new MAF.Class( {
             console.log('Dyson cool down');
         });
 
-        setTimeout(game.step0, 10000);
+        setTimeout(game.step0, 12000);
 
         (function (event) {
             log(event.payload);
         }).subscribeTo(MAF.mediaplayer, 'onStateChange');
-        var playlist = new MAF.media.Playlist();
-        playlist.addEntryByURL('https://dl.dropboxusercontent.com/content_link/LGHUtq8ldtDsAYQIaRE1aczUKdptSpwlO5KKx6WF6PCsovg5eGIWkb950ERrB8RJ/file?dl=0&duc_id=dropbox_duc_id');
-        // playlist.addEntryByURL('apps/com.aurora.app.EscapeRoom/Contents/Audio/Game_of_Thrones.mp3');
-        MAF.mediaplayer.playlist.set(playlist);
         MAF.mediaplayer.playlist.start();
-	},
-
-    resetThermo: function() {
-	    clearInterval(this.thermoInterval);
-
-        var percentage = 100;
-        var self = this;
-        this.thermoInterval = setInterval(function () {
-            self.elements.thermo.setPercentage(percentage--);
-        }, 500);
     },
 
 	// After create view and when returning to the view the update view is called
@@ -120,5 +131,6 @@ var GoT = new MAF.Class( {
 
     hideView: function() {
         nest.stopSetTemp();
+        GoT.stopThermo();
     }
-} );
+});
