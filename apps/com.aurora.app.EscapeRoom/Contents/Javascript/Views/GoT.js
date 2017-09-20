@@ -43,7 +43,7 @@ var game = {
     finish: function (victory) {
         console.log('Game step finish');
         clearInterval(this.thermoInterval);
-        clearInterval(this.failTimerId);
+        clearTimeout(this.failTimerId);
         nest.stopSetTemp();
         nest.setTemp(23, function () {
             console.log('Nest back to normal');
@@ -114,11 +114,12 @@ var GoT = new MAF.Class( {
             log(event.payload);
         }).subscribeTo(MAF.mediaplayer, 'onStateChange');
         var playlist = new MAF.media.Playlist();
-        playlist.addEntryByURL('https://dl.dropboxusercontent.com/content_link/LGHUtq8ldtDsAYQIaRE1aczUKdptSpwlO5KKx6WF6PCsovg5eGIWkb950ERrB8RJ/file?dl=0&duc_id=dropbox_duc_id');
+        playlist.addEntryByURL('https://andrei-yanovich.github.io/appathon-2017/GoT_intro_song.mp3');
+        playlist.addEntryByURL('https://andrei-yanovich.github.io/appathon-2017/RainsOfCastamere.mp3');
         MAF.mediaplayer.playlist.set(playlist);
         MAF.mediaplayer.playlist.start();
 
-        this.failTimerId = setTimeout(() => {
+        this.failTimerId = setTimeout(function () {
             game.finish(false);
         }, GAME_DURATION * 1000);
 	},

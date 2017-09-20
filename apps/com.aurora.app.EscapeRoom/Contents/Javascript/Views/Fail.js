@@ -6,6 +6,7 @@ var Fail = new MAF.Class( {
     //  1920 X 1080
     // Create your view template
     createView: function() {
+        MAF.mediaplayer.playlist.loadEntry(1);
     },
 
     // After create view and when returning to the view the update view is called

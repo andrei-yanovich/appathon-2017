@@ -7,7 +7,7 @@ function getCurrentWeight(cb) {
         onComplete: function(request) {
             var measuregrps = JSON.parse(request.response).body.measuregrps;
 
-            measuregrps.sort((a, b) => {
+            measuregrps.sort(function (a, b) {
                 return a.date - b.date;
             });
 
@@ -24,11 +24,11 @@ function getCurrentWeight(cb) {
 var nokia = {
     waitForWeight: function (targetWeight, cb) {
         function waitFor() {
-            getCurrentWeight((currentWeight) => {
+            getCurrentWeight(function (currentWeight) {
                 if (currentWeight > targetWeight) {
                     cb();
                 } else {
-                    setTimeout(() => {
+                    setTimeout(function () {
                         waitFor();
                     }, 2000);
                 }
