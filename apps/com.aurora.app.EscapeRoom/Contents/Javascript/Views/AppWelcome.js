@@ -8,6 +8,7 @@ var AppWelcome = new MAF.Class( {
     createView: function() {
         MAF.mediaplayer.init();
         fire.init(window.$().parentNode.parentNode.parentNode.parentNode);
+        window.$().style.backgroundColor = '#000';
 
         var deviceSelection = this.deviceSelection = new MAF.control.TextButton({
             theme: false,
