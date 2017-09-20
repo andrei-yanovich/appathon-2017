@@ -7,11 +7,8 @@ var AppWelcome = new MAF.Class( {
     // Create your view template
     createView: function() {
         MAF.mediaplayer.init();
-        var playlist = new MAF.media.Playlist();
-        playlist.addEntryByURL('https://andrei-yanovich.github.io/appathon-2017/GoT_intro_song.mp3');
-        MAF.mediaplayer.playlist.set(playlist);
-
         fire.init(window.$().parentNode.parentNode.parentNode.parentNode);
+
         var deviceSelection = this.deviceSelection = new MAF.control.TextButton({
             theme: false,
             label: 'Device Selection',

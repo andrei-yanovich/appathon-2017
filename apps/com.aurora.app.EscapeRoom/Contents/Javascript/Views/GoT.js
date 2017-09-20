@@ -10,11 +10,11 @@ var gotDescription;
 var GAME_DURATION = 150; // 2.5 minutes
 
 var game = {
-    step0: function () {
+    step0: function (view) {
         console.log('Game step 0');
 
         fire.onWeigth(function () {
-            game.step1();
+            game.step1(view);
         });
 
         var onAnimationEnded = function (anim) {
@@ -41,16 +41,16 @@ var game = {
             opacity: 0
         });
     },
-    step1: function () {
+    step1: function (view) {
         console.log('Game step 1');
         fire.onSteps(function () {
-            game.finish(true);
+            game.finish(true, view);
         })
     },
-    finish: function (victory) {
+    finish: function (victory, view) {
         console.log('Game step finish');
-        clearInterval(this.thermoInterval);
-        clearTimeout(this.failTimerId);
+        view.stopThermo();
+        clearTimeout(view.failTimerId);
         nest.stopSetTemp();
         nest.setTemp(23, function () {
             console.log('Nest back to normal');
@@ -77,22 +77,14 @@ var GoT = new MAF.Class( {
 	Extends: MAF.system.FullscreenView,
 
     //  1920 X 1080
-    resetThermo: function() {
-	    clearInterval(this.thermoInterval);
-
-        var percentage = 100;
-        var self = this;
-        this.thermoInterval = setInterval(function () {
-            self.elements.thermo.setPercentage(percentage--);
-        }, 1000);
-    },
-
     stopThermo: function () {
         clearInterval(this.thermoInterval);
     },
 
     // Create your view template
     createView: function() {
+        var self = this;
+
         gotDescription = this.elements.gotDescription = new MAF.element.Image({
             aspect: 'source',
             src: 'Images/Intro_text.png',
@@ -133,7 +125,9 @@ var GoT = new MAF.Class( {
             console.log('Dyson cool down');
         });
 
-        setTimeout(game.step0, 12000);
+        setTimeout(function () {
+            game.step0(self);
+        }, 12000);
 
         (function (event) {
             log(event.payload);
@@ -145,7 +139,7 @@ var GoT = new MAF.Class( {
         MAF.mediaplayer.playlist.start();
 
         this.failTimerId = setTimeout(function () {
-            game.finish(false);
+            game.finish(false, self);
         }, GAME_DURATION * 1000);
 	},
 
